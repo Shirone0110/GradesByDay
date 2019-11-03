@@ -2,6 +2,8 @@ var penguinPromise = d3.json("penguins/classData.json");
 
 var days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 
+var Day = 0;
+
 penguinPromise.then(
 function(penguins)
 {
@@ -12,10 +14,27 @@ function(penguins)
             .append("button")
             .text("Day: " + d)
             .on("click", function()
-             {
-            setup(penguins, index)
+            {
+                setup(penguins, index);
+                Day = index;
             });
     })
+    d3.select("body")
+        .append("button")
+        .text("Previous day")
+        .on("click", function()
+        {
+            if (Day == 0) Day = 37;
+            setup(penguins, Day);
+        })
+    d3.select("body")
+        .append("button")
+        .text("Next day")
+        .on("click", function()
+        {
+            if (Day == 37) Day = 0;
+            setup(penguins, Day);
+        })
     setup(penguins, 0);
 },
 function(err)
@@ -34,7 +53,7 @@ var drawPoints = function(points, xScale, yScale)
         .data(points)
         .enter()
         .append("circle")
-        .attr("cx", function(p){console.log(xScale(p.x)); return xScale(p.x)})
+        .attr("cx", function(p){return xScale(p.x)})
         .attr("cy", function(p){return yScale(p.y)})
         .attr("r", 5);
 }
@@ -43,7 +62,6 @@ var setup = function(penguins, day)
 {
     var points = penguins.map(function(d, i)
     {
-        console.log(day);
         return {x: i, y: d.quizes[day].grade};
     })
     
