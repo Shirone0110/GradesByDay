@@ -17,7 +17,9 @@ function(penguins)
             {
                 setup(penguins, index);
                 Day = index;
-            });
+                d3.select("p").text("Day " + d);
+            })
+            .attr("class", (index % 5 == 0) ? "down" : "not");
     })
     d3.select("body")
         .append("button")
@@ -25,6 +27,8 @@ function(penguins)
         .on("click", function()
         {
             if (Day == 0) Day = 37;
+            else Day--;
+            d3.select("p").text("Day " + days[Day]);
             setup(penguins, Day);
         })
     d3.select("body")
@@ -33,6 +37,8 @@ function(penguins)
         .on("click", function()
         {
             if (Day == 37) Day = 0;
+            else Day++;
+            d3.select("p").text("Day " + days[Day]);
             setup(penguins, Day);
         })
     setup(penguins, 0);
