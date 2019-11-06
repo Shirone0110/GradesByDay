@@ -1,10 +1,21 @@
-svg
-{
-    clear:both;
-    align-content: center;
-}
 button
 {
-    clear: both;
-    font-size: 20px
+    float: left;
+    margin: 10px;
+}
+
+.down
+{
+    clear: left;
+}
+
+svg
+{
+    border: 1px solid #000000;
+    float: left;
+}
+
+p
+{
+    clear: left;
 }
