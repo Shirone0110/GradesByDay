@@ -1,4 +1,10 @@
+svg
+{
+    clear:both;
+    align-content: center;
+}
 button
 {
-    clear: left;
+    clear: both;
+    font-size: 20px
 }
